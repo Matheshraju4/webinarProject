@@ -21,6 +21,7 @@ import PaymentButton from "@/components/PaymentButton";
 import { getRazorpay, verifyRazorpay } from "@/lib/razorpay";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -33,6 +34,7 @@ const formSchema = z.object({
 });
 
 export default function ProfileForm() {
+  const router = useRouter();
   useEffect(() => {
     // Dynamically load Razorpay script
     const script = document.createElement("script");
@@ -51,43 +53,49 @@ export default function ProfileForm() {
     email: string,
     contact: string
   ) => {
-    const order_id = await getRazorpay();
-    const options = {
-      key: "rzp_live_k64ecgk5XIPVgp",
-      amount: "1",
-      currency: "INR",
-      name: "Delta Art",
-      description: "Webinar project",
-      image:
-        "https://www.google.com/imgres?q=nextjs%20image%20icon%20url&imgurl=https%3A%2F%2Fstatic-00.iconduck.com%2Fassets.00%2Fnext-js-icon-2048x2048-5dqjgeku.png&imgrefurl=https%3A%2F%2Ficonduck.com%2Ficons%2F11295%2Fnext-js&docid=3LREy_izk5fyWM&tbnid=BHwjLUdxlfD00M&vet=12ahUKEwib49Wqhb-GAxW1SGwGHeLaACAQM3oECBYQAA..i&w=2048&h=2048&hcb=2&ved=2ahUKEwib49Wqhb-GAxW1SGwGHeLaACAQM3oECBYQAA",
-      order_id: order_id,
-      handler: async function (response: any) {
-        const payment_id = response.razorpay_payment_id;
-        const signature = response.razorpay_signature;
-        const Success = await verifyRazorpay(order_id, payment_id, signature);
-        if (Success.success) {
-          console.log("Success", Success);
-          toast.success("Payment Successful");
-        } else {
-          console.log("Failed", Success);
-        }
-      },
-      callback_url: "http://localhost:3000/checkout",
-      prefill: {
-        name: username,
-        email: email,
-        contact: contact,
-      },
-      notes: {
-        address: "Razorpay Corporate Office",
-      },
-      theme: {
-        color: "#1d4ed8",
-      },
-    };
+    const order_id = await getRazorpay(username, email, contact);
+    if (order_id) {
+      const options = {
+        key: "rzp_live_k64ecgk5XIPVgp",
+        amount: "1",
+        currency: "INR",
+        name: "Delta Art",
+        description: "Webinar project",
+        image:
+          "https://www.google.com/imgres?q=nextjs%20image%20icon%20url&imgurl=https%3A%2F%2Fstatic-00.iconduck.com%2Fassets.00%2Fnext-js-icon-2048x2048-5dqjgeku.png&imgrefurl=https%3A%2F%2Ficonduck.com%2Ficons%2F11295%2Fnext-js&docid=3LREy_izk5fyWM&tbnid=BHwjLUdxlfD00M&vet=12ahUKEwib49Wqhb-GAxW1SGwGHeLaACAQM3oECBYQAA..i&w=2048&h=2048&hcb=2&ved=2ahUKEwib49Wqhb-GAxW1SGwGHeLaACAQM3oECBYQAA",
+        order_id: order_id,
+        handler: async function (response: any) {
+          const payment_id = response.razorpay_payment_id;
+          const signature = response.razorpay_signature;
 
-    const rzp1 = new window.Razorpay(options);
-    rzp1.open();
+          const Success = await verifyRazorpay(order_id, payment_id, signature);
+          if (Success.success) {
+            console.log("Success", Success);
+            toast.success("Payment Successful");
+            localStorage.setItem("order_id", order_id);
+            router.push("/checkout");
+          } else {
+            console.log("Failed", Success);
+          }
+        },
+        callback_url: "http://localhost:3000/checkout",
+        prefill: {
+          name: username,
+          email: email,
+          contact: contact,
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#1d4ed8",
+        },
+      };
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } else {
+      toast.error("Something went wrong");
+    }
   };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
