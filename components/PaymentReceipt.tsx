@@ -11,12 +11,12 @@ interface PaymentReceiptProps {
 const PaymentReceipt = ({ order_id }: { order_id: string }) => {
   const [data, setData] = useState<PaymentReceiptProps | null>();
   useEffect(() => {
-    async function fetch() {
-      const response = await fetcheverythingusingOrderId(order_id);
+    async function fetch(order_ids: string) {
+      const response = await fetcheverythingusingOrderId(order_ids);
       if (response) setData(response);
     }
-    fetch();
-  }, []);
+    fetch(order_id);
+  }, [order_id]);
   return (
     <div className="bg-white overflow-hidden shadow rounded-lg border">
       <div className="px-4 py-5 sm:px-6 bg-green-500">

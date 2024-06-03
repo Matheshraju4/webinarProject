@@ -1,9 +1,9 @@
 "use client";
 import PaymentReceipt from "@/components/PaymentReceipt";
-import { LoaderCircle } from "lucide-react";
-import React, { useEffect, useState } from "react";
 
-const page = () => {
+import { useEffect, useState } from "react";
+
+const Page = () => {
   const [data, setData] = useState("");
   useEffect(() => {
     const order_id = localStorage.getItem("order_id");
@@ -43,4 +43,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
