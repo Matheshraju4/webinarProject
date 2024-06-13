@@ -1,23 +1,32 @@
 "use client";
+
 import PaymentReceipt from "@/components/PaymentReceipt";
-
+import { order_id } from "@/lib/atom";
 import { useEffect, useState } from "react";
+import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
+import { toast } from "sonner";
 
-const Page = () => {
-  const [data, setData] = useState("");
+function Checkout() {
+  const [data, setData] = useRecoilState(order_id);
+  console.log("data", data);
+
   useEffect(() => {
-    const order_id = localStorage.getItem("order_id");
-    if (!order_id) return;
-    setData(order_id);
-  }, []);
+    if (!data) {
+      const order_id = localStorage.getItem("order_id");
+      if (order_id) setData(order_id);
+      else {
+        toast.message("Order Id not found please wait for some time");
+      }
+    }
+  }, [data]);
+
   return (
     <div className="m-10 flex flex-col w-full justify-center items-center">
       <div className="max-w-3xl">
-        {" "}
         {data ? (
           <PaymentReceipt order_id={data} />
         ) : (
-          <div className=" flex flex-col justify-center items-center min-h-screen">
+          <div className="flex flex-col justify-center items-center min-h-screen">
             <svg
               aria-hidden="true"
               className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -34,13 +43,17 @@ const Page = () => {
                 fill="currentFill"
               />
             </svg>
-            <span className="text-xl text-black p-4 ">Loading...</span>
-            <p>Please wait if you Successfully paid</p>
+            <span className="text-xl text-black p-4">Loading...</span>
+            <p>Please wait if you successfully paid</p>
           </div>
         )}
       </div>
     </div>
   );
+}
+
+export const Page = () => {
+  return <Checkout />;
 };
 
 export default Page;

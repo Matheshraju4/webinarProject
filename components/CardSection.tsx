@@ -31,7 +31,7 @@ const CardSection = () => {
   ];
 
   return (
-    <div>
+    <div className="md:mb-32 mb-52  ">
       <h1 className="text-2xl md:text-3xl font-extrabold p-2 text-center m-1">
         Here is what you are Going to Learn
       </h1>

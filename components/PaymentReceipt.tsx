@@ -1,3 +1,5 @@
+"use client";
+
 import { fetcheverythingusingOrderId } from "@/lib/razorpay";
 import React, { useEffect, useState } from "react";
 

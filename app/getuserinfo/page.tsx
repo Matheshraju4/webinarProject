@@ -22,6 +22,8 @@ import { getRazorpay, verifyRazorpay } from "@/lib/razorpay";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { RecoilRoot, useRecoilState } from "recoil";
+import { order_id } from "@/lib/atom";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -33,7 +35,8 @@ const formSchema = z.object({
   }),
 });
 
-export default function ProfileForm() {
+function ProfileForm() {
+  const [orderId, setOrderId] = useRecoilState(order_id);
   const router = useRouter();
   useEffect(() => {
     // Dynamically load Razorpay script
@@ -72,7 +75,9 @@ export default function ProfileForm() {
           if (Success.success) {
             console.log("Success", Success);
             toast.success("Payment Successful");
+            setOrderId(order_id);
             localStorage.setItem("order_id", order_id);
+
             router.push("/checkout");
           } else {
             console.log("Failed", Success);
@@ -200,3 +205,9 @@ export default function ProfileForm() {
     </Form>
   );
 }
+
+const page = () => {
+  return <ProfileForm />;
+};
+
+export default page;

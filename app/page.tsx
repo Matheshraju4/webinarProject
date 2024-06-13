@@ -11,6 +11,7 @@ import CardSection from "@/components/CardSection";
 import VideoPlayer from "@/components/VideoPlayer";
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
+import Timer from "@/components/Timer";
 
 export default function Home() {
   const router = useRouter();
@@ -35,6 +36,14 @@ export default function Home() {
         </div>
       </div>
       <CardSection />
+      <div className="relative ">
+        <div className=" fixed bottom-0 left-0 right-0 flex md:flex-row flex-col justify-center items-center  p-2 bg-slate-300 mt-36 rounded-md mb-0 ">
+          <h1 className=" text-xl md:text-3xl font-bold p-1 md:pr-10">
+            Webinar will Start in{" "}
+          </h1>
+          <Timer Timing="June 25, 2024 10:00:00" />
+        </div>
+      </div>
     </>
   );
 }
