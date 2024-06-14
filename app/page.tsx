@@ -12,13 +12,37 @@ import VideoPlayer from "@/components/VideoPlayer";
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import Timer from "@/components/Timer";
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function Home() {
+  useEffect(() => {
+    async function geturl() {
+      try {
+        const response = await axios.get("/api/getcontent");
+        console.log("url", response.data);
+      } catch (error) {
+        console.error("Error fetching the URL:", error);
+      }
+    }
+    geturl();
+  }, []);
+
   const router = useRouter();
+
   return (
     <>
-      <Banner />
-      <HeaderComponent />
+      <Banner BannerContent="Super Charge your Webinar" />
+      <HeaderComponent
+        Normalheading="Launch Your"
+        coloredheading="First or Next"
+        qoutesheading="HIGH CONVERTING FUNNEL"
+        explainheading="To Get Clients Every Single Day... On Complete Automation In 2024"
+        description="    Like 9128+ previous participants In The Next 3 Hours Using Free AI Tools
+        That Brings Customers For Your Business Every Single Day even if you are
+        building for the first time with help of free tools"
+        date="6th June 2024 at 7 PM"
+      />
       <VideoPlayer />
       <div className="flex justify-center items-center w-full ">
         <div className="md:w-full md:max-w-3xl px-2 py-2">
@@ -36,14 +60,7 @@ export default function Home() {
         </div>
       </div>
       <CardSection />
-      <div className="relative ">
-        <div className=" fixed bottom-0 left-0 right-0 flex md:flex-row flex-col justify-center items-center  p-2 bg-slate-300 mt-36 rounded-md mb-0 ">
-          <h1 className=" text-xl md:text-3xl font-bold p-1 md:pr-10">
-            Webinar will Start in{" "}
-          </h1>
-          <Timer Timing="June 25, 2024 10:00:00" />
-        </div>
-      </div>
+      <Timer Timing="June 25, 2024 10:00:00" />
     </>
   );
 }
