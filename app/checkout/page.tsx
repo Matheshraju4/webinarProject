@@ -2,30 +2,34 @@
 
 import PaymentReceipt from "@/components/PaymentReceipt";
 import { order_id } from "@/lib/atom";
-import { useEffect, useState } from "react";
-import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
+import { useEffect } from "react";
+import { RecoilRoot, useRecoilState } from "recoil";
 import { toast } from "sonner";
 
-function Checkout() {
+export default function Checkout() {
   const [data, setData] = useRecoilState(order_id);
-  console.log("data", data);
 
   useEffect(() => {
     if (!data) {
-      const order_id = localStorage.getItem("order_id");
-      if (order_id) setData(order_id);
-      else {
-        toast.message("Order Id not found please wait for some time");
+      // Fetch order_id from localStorage if not already in state
+      const order_id_from_storage = localStorage.getItem("order_id");
+      if (order_id_from_storage) {
+        setData(order_id_from_storage);
+      } else {
+        // Notify user if order_id is not found in localStorage
+        toast.message("Order Id not found. Please wait for some time.");
       }
     }
-  }, [data]);
+  }, [data, setData]);
 
   return (
     <div className="m-10 flex flex-col w-full justify-center items-center">
       <div className="max-w-3xl">
         {data ? (
+          // Render PaymentReceipt component when data is available
           <PaymentReceipt order_id={data} />
         ) : (
+          // Display a loading indicator while waiting for order_id
           <div className="flex flex-col justify-center items-center min-h-screen">
             <svg
               aria-hidden="true"
@@ -40,7 +44,7 @@ function Checkout() {
               />
               <path
                 d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                fill="currentFill"
+                fill="currentFill" // <-- Ensure correct attribute name for fill
               />
             </svg>
             <span className="text-xl text-black p-4">Loading...</span>
@@ -51,9 +55,3 @@ function Checkout() {
     </div>
   );
 }
-
-export const Page = () => {
-  return <Checkout />;
-};
-
-export default Page;

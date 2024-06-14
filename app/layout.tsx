@@ -1,11 +1,16 @@
-"use client";
+import type { Metadata } from "next";
 
-import { metadata } from "./metadata"; // Import the metadata
+export const metadata: Metadata = {
+  title: "DeltaArt", // Ensure these are strings
+  description: "Webinar project", // Ensure these are strings
+};
+// Import the metadata
 import "./globals.css";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 import { RecoilRoot } from "recoil";
+import Recoil from "./recoil";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -25,10 +30,10 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <RecoilRoot>
+        <Recoil>
           {children}
           <Toaster />
-        </RecoilRoot>
+        </Recoil>
       </body>
     </html>
   );
