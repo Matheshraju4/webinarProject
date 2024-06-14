@@ -206,8 +206,8 @@ function ProfileForm() {
   );
 }
 
-const page = () => {
+const Page = () => {
   return <ProfileForm />;
 };
 
-export default page;
+export default Page;
