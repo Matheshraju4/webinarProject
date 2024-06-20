@@ -1,8 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { SquareCheckBig } from "lucide-react";
 
-const CardSection = () => {
+const CardTick = () => {
   const cardContent = [
     {
       title:
@@ -31,17 +30,21 @@ const CardSection = () => {
   ];
 
   return (
-    <div className="md:pb-24 pb-24 text-white p-5 ">
+    <div className=" text-black p-5 ">
       <h1 className="text-2xl md:text-3xl font-extrabold p-2 text-center m-1">
-        Here is what you are Going to Learn
+        Tell Us Where You are Lagging
       </h1>
+
       <div className="flex flex-wrap justify-center md:justify-start md:m-20 md:mt-3">
         {cardContent.map((card, index) => (
           <div key={index} className="p-2 w-full md:w-1/2">
-            <Card className="flex flex-row items-center bg-white border-2 border-black  shadow-xl">
-              <SquareCheckBig
-                color="#1cc430"
-                className="w-16 md:w-8 h-8 ml-4"
+            <Card className="flex flex-row items-center bg-slate-100 border-2 border-black  shadow-xl">
+              <input
+                id="helper-checkbox"
+                aria-describedby="helper-checkbox-text"
+                type="checkbox"
+                value=""
+                className="m-2 ml-4 h-10 text-blue-600 bg-gray-100  rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
               <CardContent className="text-md p-3 font-medium">
                 {card.title}
@@ -54,4 +57,4 @@ const CardSection = () => {
   );
 };
 
-export default CardSection;
+export default CardTick;

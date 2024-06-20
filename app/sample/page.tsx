@@ -1,11 +1,16 @@
 "use client";
 
+import BonusesSection2 from "@/components/BonusesSection2.0";
 import Timer from "@/components/Timer";
 import React from "react";
 import { RecoilRoot } from "recoil";
 
 const page = () => {
-  return <Timer Timing="June 25, 2024 10:00:00" />;
+  return (
+    <>
+      <BonusesSection2 />
+    </>
+  );
 };
 
 export default page;

@@ -41,26 +41,26 @@ const Timer = ({ Timing }: { Timing: string }) => {
   return (
     <>
       <div className="relative  ">
-        <div className=" fixed bottom-0 left-0 right-0 z-50 bg-slate-100 p-2 rounded-xl m-2 border-2 border-slate-400 shadow flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
+        <div className=" fixed bottom-0 right-7  md:bottom-0 md:right-0 md:mb-4 md:mr-4 z-50 bg-slate-100 p-2 rounded-xl m-2 shadow flex flex-col max-w-2xl  items-center justify-center gap-2 md:gap-4 ">
           <h1 className=" text-center text-xl font-bold ">
             Webinar will Start in
           </h1>
           <div className="flex items-center justify-center gap-4 ">
-            <div className="bg-blue-700 p-2 font-md font-bold text-white rounded-lg text-center w-16">
+            <div className="bg-yellows p-2 font-md font-bold text-black rounded-lg text-center w-16">
               <div>{days}</div>
-              <p className="text-sm font-normal text-slate-200">Days</p>
+              <p className="text-sm font-normal text-gray-700">Days</p>
             </div>
-            <div className="bg-blue-700 p-2 font-md font-bold text-white rounded-lg text-center w-16">
+            <div className="bg-yellows p-2 font-md font-bold text-black rounded-lg text-center w-16">
               <div>{hours}</div>
-              <p className="text-sm font-normal text-slate-200">Hours</p>
+              <p className="text-sm font-normal text-gray-700">Hours</p>
             </div>
-            <div className="bg-blue-700 p-2 font-md font-bold text-white rounded-lg text-center">
+            <div className="bg-yellows p-2 font-md font-bold text-black rounded-lg text-center">
               <div>{minutes}</div>
-              <p className="text-sm font-normal text-slate-200">Minutes</p>
+              <p className="text-sm font-normal text-gray-700">Minutes</p>
             </div>
-            <div className="bg-blue-700 p-2 font-md font-bold text-white rounded-lg text-center">
+            <div className="bg-yellows p-2 font-md font-bold text-black rounded-lg text-center">
               <div>{seconds}</div>
-              <p className="text-sm font-normal text-slate-200">Seconds</p>
+              <p className="text-sm font-normal text-gray-700">Seconds</p>
             </div>
           </div>
         </div>
@@ -74,7 +74,7 @@ export default Timer;
   /* <div className="flex items-start justify-center gap-4 count-down-main">
 <div className="timer w-16">
   <div className="bg-indigo-600 py-4 px-2 rounded-lg overflow-hidden">
-    <h3 className="countdown-element days font-Cormorant font-semibold text-2xl md:text-xl text-white text-center">
+    <h3 className="countdown-element days font-Cormorant font-semibold text-2xl md:text-xl text-black text-center">
       {days}
     </h3>
   </div>
@@ -87,7 +87,7 @@ export default Timer;
 </h3>
 <div className="timer w-16">
   <div className="bg-indigo-600 py-4 px-2 rounded-lg overflow-hidden">
-    <h3 className="countdown-element hours font-Cormorant font-semibold text-2xl md:text-xl text-white text-center">
+    <h3 className="countdown-element hours font-Cormorant font-semibold text-2xl md:text-xl text-black text-center">
       {hours}
     </h3>
   </div>
@@ -100,7 +100,7 @@ export default Timer;
 </h3>
 <div className="timer w-16">
   <div className="bg-indigo-600 py-4 px-2 rounded-lg overflow-hidden">
-    <h3 className="countdown-element minutes font-Cormorant font-semibold text-2xl md:text-xl text-white text-center">
+    <h3 className="countdown-element minutes font-Cormorant font-semibold text-2xl md:text-xl text-black text-center">
       {minutes}
     </h3>
   </div>
@@ -113,7 +113,7 @@ export default Timer;
 </h3>
 <div className="timer w-16">
   <div className="bg-indigo-600 py-4 px-2 rounded-lg overflow-hidden">
-    <h3 className="countdown-element seconds font-Cormorant font-semibold text-2xl md:text-xl text-white text-center animate-countinsecond">
+    <h3 className="countdown-element seconds font-Cormorant font-semibold text-2xl md:text-xl text-black text-center animate-countinsecond">
       {seconds < 10 ? `0${seconds}` : seconds}
     </h3>
   </div>

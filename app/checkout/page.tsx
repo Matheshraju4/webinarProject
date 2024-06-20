@@ -1,5 +1,6 @@
 "use client";
 
+import Join from "@/components/Join";
 import PaymentReceipt from "@/components/PaymentReceipt";
 import { order_id } from "@/lib/atom";
 import { useEffect } from "react";
@@ -23,10 +24,9 @@ export default function Checkout() {
   }, [data, setData]);
 
   return (
-    <div className="m-10 flex flex-col w-full justify-center items-center">
+    <div className=" mt-3 md:m-10 flex flex-col w-full justify-center items-center">
       <div className="max-w-3xl">
         {data ? (
-          // Render PaymentReceipt component when data is available
           <PaymentReceipt order_id={data} />
         ) : (
           // Display a loading indicator while waiting for order_id

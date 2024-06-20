@@ -124,27 +124,30 @@ function ProfileForm() {
 
   return (
     <Form {...form}>
-      <div className="flex flex-col justify-center items-center w-full min-h-screen p-4 bg-gradient-to-r from-white to-blue-200 ">
-        <h1 className="text-3xl font-bold mb-8 text-center">
-          Enter Valid Information
-        </h1>
+      <div className="flex flex-col justify-center items-center w-full p-4">
+        <div className="  w-full text-center bg-yellows p-4 mt-2 text-3xl md:text-6xl  font-bold rounded-md ">
+          <h1>Super Charge Your Webinar</h1>
+        </div>
+      </div>
+      <div className="flex flex-col justify-center items-center w-full  p-4  ">
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 bg-blue   md:w-1/2 w-full  p-5 border-2 border-slate-800 rounded-lg bg-white"
+          className="space-y-8 bg-blue   md:w-1/2 w-full  md:pt-15  md:p-10   p-8 rounded-lg bg-white shadow-lg"
         >
+          <h1 className="md:text-4xl text-2xl font-bold mb-8  text-center">
+            Enter Valid Information
+          </h1>
           <FormField
             control={form.control}
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xl font-semibold">
-                  Username
-                </FormLabel>
+                <FormLabel className="text-xl font-semibold ">Name</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Matheshraju"
                     {...field}
-                    className="border-slate-600 text-slate-500 focus:text-black focus:border-black focus:border-2"
+                    className="border-slate-400 text-slate-500 focus:text-black focus:border-black focus:border-2"
                   />
                 </FormControl>
                 <FormDescription>
@@ -196,7 +199,7 @@ function ProfileForm() {
 
           <Button
             type="submit"
-            className="w-full bg-blue-700 hover:bg-blue-800 text-2xl p-6"
+            className="w-full bg-orange-500 hover:bg-orange-600 text-2xl p-6"
           >
             Submit & Pay
           </Button>
